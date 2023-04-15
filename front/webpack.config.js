@@ -31,7 +31,7 @@ module.exports = {
     output: {
         filename: "bundle.js",
         path: path.resolve("dist"),
-        publicPath: process.env.Domain || "./",
+        publicPath: process.env.backend_address || "./",
     },
     plugins: [
         new HTMLWebpackPlugin({
