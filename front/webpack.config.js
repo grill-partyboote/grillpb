@@ -16,11 +16,29 @@ module.exports = {
                 use: "html-loader"
             },
             {
-                test: /\.pcss$/,
+                test: /\.pcss$/i,
                 use:[
                     "style-loader",
-                    "css-loader",
-                    "postcss-loader"
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                        },
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                    ],
+                                ],
+                                modules: true,
+                            },
+                        },
+                    },
                 ],
             },
         ],
