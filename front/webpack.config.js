@@ -41,6 +41,14 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
         ],
     },
     resolve: {
@@ -55,5 +63,6 @@ module.exports = {
         new HTMLWebpackPlugin({
             template: "src/index.html"
         }),
-    ]
+    ],
+    watch: true,
 }
