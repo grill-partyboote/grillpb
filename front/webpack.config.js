@@ -24,7 +24,6 @@ module.exports = (env) => {
                             loader: "css-loader",
                             options: {
                                 modules: true,
-                                importLoaders: 1,
                             },
                         },
                         {
@@ -43,7 +42,8 @@ module.exports = (env) => {
                     ],
                 },
                 {
-                    test: /\.(gif|svg)$/i,
+                    test: /\.(svg|png|jpe?g|gif)$/i,
+                    dependency: { not: ['url'] },
                     use: [
                         {
                             loader: 'file-loader',
@@ -53,7 +53,7 @@ module.exports = (env) => {
             ],
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js'],
+            extensions: ['.tsx', '.ts', '.js', '.pcss'],
             modules: [ path.resolve(__dirname, "."), "node_modules"]
         },
         output: {
