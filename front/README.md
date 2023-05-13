@@ -4,6 +4,6 @@
 
 or
 
--`node server.js` && `npm run watch` 
+-`node server.js` && `npm run webpack` 
 
-Open `*/front/dist/index.html` or `${process.env.Domain}/` or `localhost:9000`
+Open `${process.env.backend_address}/` or `localhost:9000`
