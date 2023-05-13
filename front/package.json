@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && webpack --mode development",
-    "watch": "rm -rf dist && webpack --mode development --env watch",
+    "webpack": "rm -rf dist && webpack --mode development --env watch",
     "dev": "nodemon app.js"
   },
   "author": "",
@@ -33,6 +33,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",

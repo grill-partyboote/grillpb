@@ -9,11 +9,15 @@ import logo from "src/pictures/logo.svg";
 
 import s from "./header.pcss";
 
-interface HeaderProps {
-
+export interface HeaderProps {
+	openModal: () => void;
 }
 
 export function Header(props: HeaderProps): JSX.Element {
+	const {
+		openModal
+	} = props;
+	// todo: add proper links
 	return (
 		<div className={ s.headerWrapper } >
 			<div className={ s.header }>
@@ -31,7 +35,7 @@ export function Header(props: HeaderProps): JSX.Element {
 					<Link href="#" variant="body2">
 						{t('Contacts')}
 					</Link>
-					<Button variant="contained">{t('Contacts')}</Button>
+					<Button variant="contained" onClick={openModal}>{t('Book')}</Button>
 				</div>
 			</div>
 		</div>)
