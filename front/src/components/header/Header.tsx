@@ -17,7 +17,6 @@ export function Header(props: HeaderProps): JSX.Element {
 	const {
 		openModal
 	} = props;
-	// todo: add proper links
 	return (
 		<div className={ s.headerWrapper } >
 			<div className={ s.header }>
