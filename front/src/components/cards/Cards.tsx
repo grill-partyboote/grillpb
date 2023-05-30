@@ -20,6 +20,7 @@ export interface CardProps {
 }
 
 // todo: add nearest available dates
+// todo: lock 2 of 3 boats
 export function Cards(props: CardProps): JSX.Element {
 	const {
 		cardsMeta

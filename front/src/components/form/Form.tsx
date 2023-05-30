@@ -1,69 +1,140 @@
 import React, {useState} from "react";
 import {t} from 'src/i18n';
-import { TextField, Button, Checkbox, FormControl, InputLabel, Select, MenuItem, FormGroup, Modal, Box, Typography } from "@mui/material";
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem, FormGroup, Modal, Box, Typography } from "@mui/material";
 
 import s from "./form.pcss";
 
 export interface FormProps {
 	boatOptions: BoatOption[];
+	preSelectedBoatOption?: BoatOption;
 	isOpened: boolean;
 	onClose: () => void;
 }
 
 interface BoatOption {
+	id: string,
 	value: string,
 	label: string,
+	maxPeopleCapability: number,
+	disabled: boolean;
 }
 
 export function Form(props: FormProps): JSX.Element {
 	const {
 		boatOptions,
+		preSelectedBoatOption,
 		isOpened,
 		onClose,
 	} = props;
 
 	const [name, setName] = useState("");
-	const [phone, setPhone] = useState("");
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
-	const [selectedBoat, setSelectedBoat] = useState<BoatOption>({}); // todo: set from props
-	const handleNameChange = (event) => {
-		setName(event.target.value);
-	};
+	const [nameError, setNameError] = useState(false);
 
-	const handlePhoneChange = (event) => {
-		setPhone(event.target.value);
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [phoneError, setPhoneError] = useState(false);
+
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");2
+	const [dateError, setDateError] = useState(false);
+
+	const [email, setEmail] = useState('');
+	const [emailError, setEmailError] = useState(false);
+
+	const [selectedBoat, setSelectedBoat] = useState(preSelectedBoatOption.id ?? boatOptions[0].id);
+	const [selectedBoatError, setSelectedBoatError] = useState(false);
+
+	const handleNameChange = (event) => {
+		const value = event.target.value;
+		setName(event.target.value);
+		setNameError(value === '')
 	};
 
 	const handleStartDateChange = (event) => {
-		setStartDate(event.target.value);
+		const value = event.target.value;
+		setStartDate(value);
+		setDateError(value === '' || endDate === '' )
 	};
 
 	const handleEndDateChange = (event) => {
-		setEndDate(event.target.value);
+		const value = event.target.value;
+		setEndDate(value);
+		setDateError(value === '' || startDate === '' )
 	};
 
 	const handleBoatChange = (event) => {
-		setSelectedBoat(event.target.value as BoatOption);
+		const value = event.target.value;
+		setSelectedBoat(value as string);
+		setSelectedBoatError(value === '');
+	};
+
+	const handlePhoneNumberChange = (event) => {
+		let value = event.target.value.split('+49')[1];
+		if (value == undefined){
+			setPhoneError(true);
+			return;
+		}
+
+		// Limit input to 10 chars and plus sign
+		if (value.length > 11) {
+			value = value.slice(0, 11);
+		}
+
+		setPhoneNumber(formatPhoneNumber(value));
+		setPhoneError(!validatePhoneNumber(value));
+	};
+
+	const formatPhoneNumber = (phoneNumber) => {
+		let formattedPhoneNumber = phoneNumber.trim();
+
+		return formattedPhoneNumber;
+	};
+
+	const validatePhoneNumber = (phoneNumber) => {
+		const phoneRegex = /^\d{5}\d{5}$/;
+		return phoneRegex.test(phoneNumber);
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		if(compositeValidate()){
+			return;
+		}
+
 		// todo: send query
 		console.log({
 			name,
-			phone,
+			phoneNumber,
 			startDate,
 			endDate,
-			selectedBoats: selectedBoat
+			selectedBoat: boatOptions.filter((x)=> x.id === selectedBoat)[0],
 		});
-		// todo: add model with thank words
-		onClose();
+		onClose()
 	};
 
-	// todo: add i18n
-	// todo: add styles
-	// todo: fix console errors
+	const compositeValidate = () => {
+		const nameError = name === '';
+		const phoneError = !validatePhoneNumber(phoneNumber);
+		const dateError = startDate === '' || endDate === '';
+		const emailError = !validateEmail(email);
+		const selectedBoatError = selectedBoat === '';
+		setNameError(nameError);
+		setPhoneError(phoneError);
+		setDateError(dateError);
+		setEmailError(emailError);
+		setSelectedBoatError(selectedBoatError);
+		return nameError || phoneError || dateError || emailError || selectedBoatError;
+	}
+
+	const handleEmailChange = (event) => {
+		const value = event.target.value;
+		setEmail(value);
+		setEmailError(!validateEmail(value));
+	};
+
+	const validateEmail = (email) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(email);
+	};
 
 	return (
 		<Modal
@@ -72,57 +143,89 @@ export function Form(props: FormProps): JSX.Element {
 			aria-labelledby="form-modal"
 			aria-describedby="form-modal-description"
 		>
-			<Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+			<div className={s.formWrapper}>
 				<Typography id="form-modal" variant="h5" gutterBottom>
-					Book a Boat
+					{t('Book a Boat')}
 				</Typography>
-				<form className={s.formWrapper}
-					  onSubmit={handleSubmit} >
+				<form className={s.form}
+					onSubmit={(e) => e.preventDefault()}>
 					<TextField
-						label="Name"
+						label={t('name')}
 						value={name}
+						error={nameError}
+						helperText={nameError ? t('Name shouldnt be empty') : ''}
 						onChange={handleNameChange}
 					/>
 					<TextField
-						label="Phone Number"
-						value={phone}
-						onChange={handlePhoneChange}
+						label={t('phone number')}
+						variant="outlined"
+						value={'+49'+phoneNumber}
+						onChange={handlePhoneNumberChange}
+						error={phoneError}
+						helperText={phoneError ? t('Invalid phone number') : ''}
+						inputProps={{ maxLength: 13 }}
 					/>
 					<TextField
-						label="Start Date"
+						label={t('start date')}
 						type="date"
 						value={startDate}
 						onChange={handleStartDateChange}
+						error={dateError}
+						helperText={dateError ? t('Invalid date') : ''}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
 					<TextField
-						label="End Date"
+						label={t('end date')}
 						type="date"
 						value={endDate}
 						onChange={handleEndDateChange}
+						error={dateError}
+						helperText={dateError ? t('Invalid date') : ''}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
+					<TextField
+						label={t('e-mail')}
+						variant="outlined"
+						value={email}
+						onChange={handleEmailChange}
+						error={emailError}
+						helperText={emailError ? t('Invalid email address') : ''}
+					/>
 					<FormControl>
-						<InputLabel id="boat-select-label">Boats</InputLabel>
+						<InputLabel id="boat-select-label">
+							{t('boat')}
+						</InputLabel>
 						<Select
 							labelId="boat-select-label"
-							value={selectedBoat.label}
+							value={ selectedBoat }
 							onChange={handleBoatChange}
+							id="boat-select-label"
+							label="Age"
 						>
-							{boatOptions.map((option) => (
-								<MenuItem key={option.value} value={option.value}>
-									{option.label}
+							{boatOptions.map((option: BoatOption) => (
+								<MenuItem
+									key={option.value}
+									itemID={option.value}
+									id={option.value}
+									value={option.value}
+									disabled={option.disabled}
+								>
+									{option.label} ({t('max')} {option.maxPeopleCapability})
 								</MenuItem>
 							))}
 						</Select>
 					</FormControl>
-					<Button type="submit">Submit</Button>
+					<Button type="submit"
+							onClick={handleSubmit}
+							disabled={emailError || phoneError || nameError || dateError || selectedBoatError}>
+						{t('Submit')}
+					</Button>
 				</form>
-			</Box>
+			</div>
 		</Modal>
 	);
 }

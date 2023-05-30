@@ -1,3 +1,36 @@
 .formWrapper {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+
+    padding: 30px 20px;
+
+    background-color: #fff;
+
+    -webkit-box-shadow: 15px 15px 13px -14px rgb(30 184 205 / 65%);
+    -moz-box-shadow: 15px 15px 13px -14px rgb(30 184 205 / 65%);
+    box-shadow: 15px 15px 13px -14px rgb(30 184 205 / 65%);
+
+    & > * {
+        width: 100%;
+        & > div {
+            width: 100%;
+            & > * {
+                width: 100%;
+            }
+        }
+    }
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+@media (max-width:800px) {
 
 }
