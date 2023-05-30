@@ -19,18 +19,24 @@ export function Jumbatron(props: JumbatronProps): JSX.Element {
 				<h3>{t('Lorem ipsum dolor sit amet, consectetur adipisicing elit')}</h3>
 			</div>
 			<div className={ s.jumbatronButtons }>
-				<Button variant="contained">
-					{t('Boats')}
-				</Button>
-				<Button variant="contained">
-					{t('Grills ')}
-				</Button>
+				<a href="#boats">
+					<Button variant="contained">
+						{t('Boats')}
+					</Button>
+				</a>
+				<a href="#grills">
+					<Button variant="contained">
+						{t('Grills')}
+					</Button>
+				</a>
 			</div>
 			<div className={ s.jumbatronArrow }>
-				<ExpandMoreRoundedIcon
-					color="primary"
-					sx={{ fontSize: 100 }}>
-				</ExpandMoreRoundedIcon>
+				<a href="#boats">
+					<ExpandMoreRoundedIcon
+						color="primary"
+						sx={{ fontSize: 100 }}>
+					</ExpandMoreRoundedIcon>
+				</a>
 			</div>
 		</div>)
 }
