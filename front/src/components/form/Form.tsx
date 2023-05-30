@@ -18,7 +18,7 @@ interface BoatOption {
 	maxPeopleCapability: number,
 	disabled: boolean;
 }
-
+// todo: add grill option
 export function Form(props: FormProps): JSX.Element {
 	const {
 		boatOptions,

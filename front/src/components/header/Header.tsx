@@ -23,16 +23,16 @@ export function Header(props: HeaderProps): JSX.Element {
 			<div className={ s.header }>
 				<img src={logo} alt="" className={ s.logo }/>
 				<div className={ s.navbar }>
-					<Link href="#" variant="body2">
+					<Link href="#jumbatron" variant="body2">
 						{t('Start')}
 					</Link>
-					<Link href="#" variant="body2">
+					<Link href="#boats" variant="body2">
 						{t('Boats')}
 					</Link>
-					<Link href="#" variant="body2">
-						{t('Gallery')}
+					<Link href="#grills" variant="body2">
+						{t('Grills')}
 					</Link>
-					<Link href="#" variant="body2">
+					<Link href="#contacts" variant="body2">
 						{t('Contacts')}
 					</Link>
 					<Button variant="contained" onClick={openModal}>{t('Book')}</Button>

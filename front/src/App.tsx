@@ -2,7 +2,9 @@ import React, {useState} from "react";
 
 import {Header, HeaderProps} from "./components/header/Header";
 import {Jumbatron} from "./components/jumbatron/Jumbatron";
-import {CardProps, Cards} from "./components/cards/Cards";
+import {Cards, CardProps} from "./components/cards/Cards";
+import {Grills, GrillsProps} from "./components/grills/Grills";
+import {Contacts, ContactsProps} from "./components/contacts/Contacts";
 import {Form, FormProps} from "./components/form/Form";
 import s from "./styles.pcss"
 import image from "src/pictures/jumbatron.jpeg";
@@ -65,33 +67,36 @@ export function App() {
 		openModal: () => setModalOpened(true),
 	};
 
+	const grillsProps: GrillsProps = {
+		grillMeta: ['bronze', 'gold', 'silver'], // todo: move to data
+		openModal: () => setModalOpened(true),
+	};
+
+	const contactsProps: ContactsProps = {};// todo: move to data
+
+	const boatOptions = boatsData.map((boatData: BoatData) => {
+		return {
+			id: `${boatData.id}`,
+			value: `${boatData.id}`,
+			label: boatData.title,
+			maxPeopleCapability: boatData.maxPeopleCapability,
+			disabled: boatData.isUnderMaintenance || boatData.isComingSoon,
+		};
+	})
+
 	const formProps: FormProps = {
-		boatOptions: boatsData.map((boatData: BoatData) => {
-			return {
-				id: `${boatData.id}`,
-				value: `${boatData.id}`,
-				label: boatData.title,
-				maxPeopleCapability: boatData.maxPeopleCapability,
-				disabled: boatData.isUnderMaintenance || boatData.isComingSoon,
-			};
-		}),
-		preSelectedBoatOption: boatsData.map((boatData: BoatData) => {
-			return {
-				id: `${boatData.id}`,
-				value: `${boatData.id}`,
-				label: boatData.title,
-				maxPeopleCapability: boatData.maxPeopleCapability,
-				disabled: boatData.isUnderMaintenance || boatData.isComingSoon,
-			};
-		})[0],
+		boatOptions,
+		preSelectedBoatOption: boatOptions[0],
 		isOpened: modalOpened,
 		onClose: () => setModalOpened(false),
 	};
 
 	return <>
-		<Header { ...headerProps }/>
-		<Jumbatron />
-		<Cards { ...cardProps }/>
 		<Form { ...formProps }/>
+		<Header { ...headerProps }/>
+		<Jumbatron/>
+		<Cards { ...cardProps }/>
+		<Grills { ...grillsProps }/>
+		<Contacts { ...contactsProps }/>
 	</>;
 }

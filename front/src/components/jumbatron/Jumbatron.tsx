@@ -11,10 +11,9 @@ interface JumbatronProps {
 }
 
 export function Jumbatron(props: JumbatronProps): JSX.Element {
-	// todo: add proper links
 	// todo: add promo text upon the arrow
 	return (
-		<div className={ s.jumbatron }>
+		<div className={ s.jumbatron } id='jumbatron'>
 			<div className={ s.jumbatronHeader }>
 				<h1>{t('Grill and party boat rental')}</h1>
 				<h3>{t('Lorem ipsum dolor sit amet, consectetur adipisicing elit')}</h3>

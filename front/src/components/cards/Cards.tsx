@@ -27,7 +27,7 @@ export function Cards(props: CardProps): JSX.Element {
 	} = props;
 
 	return (
-		<div className={s.cardsWrapper}>
+		<div className={s.cardsWrapper} id='boats'>
 			{ cardsMeta.map((cardMeta: BoatData)=>{
 				return (
 					<Card className={`${s.card} ${(cardMeta.isUnderMaintenance || cardMeta.isComingSoon) && s.disabled}`} key={cardMeta.id}>
