@@ -20,7 +20,8 @@ export interface BoatData {
 	isUnderMaintenance: boolean,
 	isComingSoon: boolean,
 }
-
+// todo: move to other file (serverConnection) and others data
+// todo: add availability dates (maybe for nearest 3 month only, and lock dates than farther 3 next month )
 const boatsData: BoatData[] = [
 	{
 		id: 0,
@@ -98,5 +99,7 @@ export function App() {
 		<Cards { ...cardProps }/>
 		{<Grills { ...grillsProps }/>/* todo: implement */}
 		{<Contacts { ...contactsProps }/>/* todo: implement */}
+		{/* todo: implement block with parallax image effect */}
+		{/* todo: implement block with stats */}
 	</>;
 }
