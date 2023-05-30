@@ -15,8 +15,8 @@ export interface BoatData {
 	promtText: string,
 	price: string,
 	maxPeopleCapability: number,
-	isUnderMaintenance : boolean,
-	isComingSoon : boolean,
+	isUnderMaintenance: boolean,
+	isComingSoon: boolean,
 }
 
 const boatsData: BoatData[] = [
@@ -62,6 +62,7 @@ export function App() {
 
 	const cardProps: CardProps = {
 		cardsMeta: boatsData,
+		openModal: () => setModalOpened(true),
 	};
 
 	const formProps: FormProps = {

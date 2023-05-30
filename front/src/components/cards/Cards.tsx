@@ -17,20 +17,20 @@ import s from "./cards.pcss";
 
 export interface CardProps {
 	cardsMeta: BoatData[]
+	openModal: () => void;
 }
 
-// todo: add nearest available dates
-// todo: lock 2 of 3 boats
 export function Cards(props: CardProps): JSX.Element {
 	const {
-		cardsMeta
+		cardsMeta,
+		openModal
 	} = props;
 
-	return (<>
+	return (
 		<div className={s.cardsWrapper}>
-			{ cardsMeta.map((cardMeta)=>{
+			{ cardsMeta.map((cardMeta: BoatData)=>{
 				return (
-					<Card className={s.card} key={cardMeta.id}>
+					<Card className={`${s.card} ${(cardMeta.isUnderMaintenance || cardMeta.isComingSoon) && s.disabled}`} key={cardMeta.id}>
 						<div>
 							<CardMedia
 								component="img"
@@ -39,20 +39,37 @@ export function Cards(props: CardProps): JSX.Element {
 								image={cardMeta.image}
 							/>
 							<CardContent>
-								<Typography gutterBottom variant="h5" component="div">
-									{cardMeta.title}
+								<Typography gutterBottom variant="h5" component="span">
+									{cardMeta.title}{
+										cardMeta.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{t(' (coming soon)')}
+										</Typography>
+									}{
+										cardMeta.isUnderMaintenance && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{t(' (under maintenance)')}
+										</Typography>
+									}{
+										!cardMeta.isUnderMaintenance && !cardMeta.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{t(' (book now)')}
+										</Typography>
+									}
 								</Typography>
 								<Typography variant="body2" color="text.secondary">
 									{cardMeta.promtText}
 								</Typography>
 							</CardContent>
 						</div>
-						<CardActions  className={s.cardActions}>
-							<Button size="small">{t('Order')}</Button>
+						<CardActions className={s.cardActions}>
+							<Button size="small"
+									disabled={cardMeta.isUnderMaintenance || cardMeta.isComingSoon}
+									onClick={openModal}
+							>
+								{t('Order')}
+							</Button>
 						</CardActions>
 					</Card>
 				)
 			})}
 		</div>
-	</>);
+	);
 }

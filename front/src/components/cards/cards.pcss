@@ -24,6 +24,23 @@
             justify-content: flex-end;
             gap: 20px;
         }
+
+        & .kek {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility cubic-bezier(0.4, 0, 0.2, 1) 300ms, opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+        }
+
+        &:hover {
+            & .kek{
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        &.disabled {
+            filter: brightness(0.5);
+        }
     }
 }
 
@@ -38,6 +55,23 @@
         & .card {
             max-width: 360px;
             width: 100%;
+
+            & .kek {
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility cubic-bezier(0.4, 0, 0.2, 1) 300ms, opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+            }
+
+            &:hover {
+                & .kek{
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+            &.disabled {
+                filter: brightness(0.5);
+            }
         }
     }
 }
