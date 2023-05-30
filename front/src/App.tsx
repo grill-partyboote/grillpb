@@ -96,7 +96,7 @@ export function App() {
 		<Header { ...headerProps }/>
 		<Jumbatron/>
 		<Cards { ...cardProps }/>
-		<Grills { ...grillsProps }/>
-		<Contacts { ...contactsProps }/>
+		{<Grills { ...grillsProps }/>/* todo: implement */}
+		{<Contacts { ...contactsProps }/>/* todo: implement */}
 	</>;
 }
