@@ -6,9 +6,13 @@ import {Cards, CardProps} from "./components/cards/Cards";
 import {Grills, GrillsProps} from "./components/grills/Grills";
 import {Contacts, ContactsProps} from "./components/contacts/Contacts";
 import {Form, FormProps} from "./components/form/Form";
+import {Stat, Stats, StatsProps} from "./components/stats/Stats.tsx";
 import s from "./styles.pcss"
 import image from "src/pictures/jumbatron.jpeg";
 import {t} from "src/i18n";
+import SailingIcon from "@mui/icons-material/Sailing";
+import SurfingIcon from "@mui/icons-material/Surfing";
+import MoodSharpIcon from "@mui/icons-material/MoodSharp";
 
 export interface BoatData {
 	image: string,
@@ -55,6 +59,32 @@ const boatsData: BoatData[] = [
 	}
 ];
 
+const statsData: Stat[] = [
+	{
+		text: t('Miles traveled'),
+		value: ' 2000',
+		icon: (<SailingIcon
+			color="primary"
+			sx={{ fontSize: 100 }}>
+		</SailingIcon>),
+	},
+	{
+		text: t('Repeat clients'),
+		value: ' 35%',
+		icon: (<SurfingIcon
+			color="primary"
+			sx={{ fontSize: 100 }}>
+		</SurfingIcon>),
+	},
+	{
+		text: t('Emotions delivered'),
+		value: ' ∞',
+		icon: (<MoodSharpIcon
+			color="primary"
+			sx={{ fontSize: 100 }}>
+		</MoodSharpIcon>),
+	}
+]
 
 export function App() {
 	const [modalOpened, setModalOpened] = useState(false);
@@ -83,7 +113,7 @@ export function App() {
 			maxPeopleCapability: boatData.maxPeopleCapability,
 			disabled: boatData.isUnderMaintenance || boatData.isComingSoon,
 		};
-	})
+	});
 
 	const formProps: FormProps = {
 		boatOptions,
@@ -92,14 +122,19 @@ export function App() {
 		onClose: () => setModalOpened(false),
 	};
 
+	const statsProps: StatsProps = {
+		stats: statsData,
+	};
+
 	return <>
 		<Form { ...formProps }/>
 		<Header { ...headerProps }/>
 		<Jumbatron/>
 		<Cards { ...cardProps }/>
+		<Stats { ...statsProps }/>
+		<Contacts { ...contactsProps }/>
 		{<Grills { ...grillsProps }/>/* todo: implement */}
-		{<Contacts { ...contactsProps }/>/* todo: implement */}
+		{<Map></Map>/* todo: implement */}
 		{/* todo: implement block with parallax image effect */}
-		{/* todo: implement block with stats */}
 	</>;
 }
