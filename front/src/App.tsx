@@ -7,6 +7,7 @@ import {Grills, GrillsProps} from "./components/grills/Grills";
 import {Contacts, ContactsProps} from "./components/contacts/Contacts";
 import {Form, FormProps} from "./components/form/Form";
 import {Stat, Stats, StatsProps} from "./components/stats/Stats.tsx";
+import {Map, MapProps} from "./components/map/Map.tsx";
 import s from "./styles.pcss"
 import image from "src/pictures/jumbatron.jpeg";
 import {t} from "src/i18n";
