@@ -12,6 +12,7 @@ interface JumbatronProps {
 
 export function Jumbatron(props: JumbatronProps): JSX.Element {
 	// todo: add promo text upon the arrow
+	// todo: think what to do with grills button
 	return (
 		<div className={ s.jumbatron } id='jumbatron'>
 			<div className={ s.jumbatronHeader }>

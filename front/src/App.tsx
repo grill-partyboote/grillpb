@@ -1,19 +1,23 @@
 import React, {useState} from "react";
+import SailingIcon from "@mui/icons-material/Sailing";
+import SurfingIcon from "@mui/icons-material/Surfing";
+import MoodSharpIcon from "@mui/icons-material/MoodSharp";
+
+import {t} from "src/i18n";
+import image from "src/pictures/jumbatron.jpeg";
 
 import {Header, HeaderProps} from "./components/header/Header";
 import {Jumbatron} from "./components/jumbatron/Jumbatron";
 import {Cards, CardProps} from "./components/cards/Cards";
-import {Grills, GrillsProps} from "./components/grills/Grills";
-import {Contacts, ContactsProps} from "./components/contacts/Contacts";
+import {GrillsProps} from "./components/grills/Grills";
+import {ContactsProps} from "./components/contacts/Contacts";
 import {Form, FormProps} from "./components/form/Form";
 import {Stat, Stats, StatsProps} from "./components/stats/Stats.tsx";
-import {Map, MapProps} from "./components/map/Map.tsx";
+import {Parallax, ParallaxProps} from "./components/parallax/Parallax.tsx";
+import {MapComponent as Map, MapProps} from "./components/map/Map.tsx";
+import {Footer} from "./components/footer/Footer.tsx";
+
 import s from "./styles.pcss"
-import image from "src/pictures/jumbatron.jpeg";
-import {t} from "src/i18n";
-import SailingIcon from "@mui/icons-material/Sailing";
-import SurfingIcon from "@mui/icons-material/Surfing";
-import MoodSharpIcon from "@mui/icons-material/MoodSharp";
 
 export interface BoatData {
 	image: string,
@@ -25,6 +29,7 @@ export interface BoatData {
 	isUnderMaintenance: boolean,
 	isComingSoon: boolean,
 }
+// todo: fix links and make them make sense
 // todo: move to other file (serverConnection) and others data
 // todo: add availability dates (maybe for nearest 3 month only, and lock dates than farther 3 next month )
 const boatsData: BoatData[] = [
@@ -104,7 +109,17 @@ export function App() {
 		openModal: () => setModalOpened(true),
 	};
 
-	const contactsProps: ContactsProps = {};// todo: move to data
+	// todo: contacts data should be already translated
+	const contactsProps: ContactsProps = {// todo: move to data
+		phoneNumber: '+1 123-456-7890',
+		email: 'info@example.com',
+		address: '123 Boat Rental St, Marina City',
+	};
+
+	const parallaxProps: ParallaxProps = { // todo: move to data
+		openModal: () => setModalOpened(true),
+		contacts: contactsProps,
+	};
 
 	const boatOptions = boatsData.map((boatData: BoatData) => {
 		return {
@@ -115,6 +130,10 @@ export function App() {
 			disabled: boatData.isUnderMaintenance || boatData.isComingSoon,
 		};
 	});
+
+	const mapProps: MapProps = {
+		lonlat: [47.9976275, 11.3449851],
+	}
 
 	const formProps: FormProps = {
 		boatOptions,
@@ -133,9 +152,8 @@ export function App() {
 		<Jumbatron/>
 		<Cards { ...cardProps }/>
 		<Stats { ...statsProps }/>
-		<Contacts { ...contactsProps }/>
-		{<Grills { ...grillsProps }/>/* todo: implement */}
-		{<Map></Map>/* todo: implement */}
-		{/* todo: implement block with parallax image effect */}
+		<Parallax {...parallaxProps}/>
+		<Map {...mapProps}/>
+		<Footer/>
 	</>;
 }

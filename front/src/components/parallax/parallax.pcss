@@ -1,0 +1,39 @@
+.parallaxWrapper{
+    /* The image used */
+    background-image:
+            linear-gradient(rgb(40, 77, 207, 0.15) 0%, rgb(18, 141, 209, 0.2) 54.69%, rgb(30, 184, 205, 0.2) 93.75%),
+            url("src/pictures/parallax.jpeg");
+    /* Set a specific height */
+    min-height: 400px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 60px;
+    gap: 50px;
+
+    & .parallaxContacts {
+        width: 50%;
+        height: 100%;
+    }
+
+    & .parallaxSide{
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .button {
+        background-color: rgba(30, 184, 205, 0.85)!important;
+        color: black!important;
+    }
+}
