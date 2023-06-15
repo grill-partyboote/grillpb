@@ -146,6 +146,10 @@ export function App() {
 		stats: statsData,
 	};
 
+	React.useEffect(()=>{
+		translations();
+	},[])
+
 	return <>
 		<Form { ...formProps }/>
 		<Header { ...headerProps }/>
@@ -156,4 +160,9 @@ export function App() {
 		<Map {...mapProps}/>
 		<Footer/>
 	</>;
+}
+
+function translations() {
+	// todo: send overall query with navigator.languages
+	console.log(navigator.languages); // format: ["en-US", "en", "de"]
 }

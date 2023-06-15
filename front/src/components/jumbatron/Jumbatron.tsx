@@ -1,6 +1,7 @@
 import React from "react";
 import {
 	Button,
+	Typography,
 } from '@mui/material';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
@@ -11,8 +12,7 @@ interface JumbatronProps {
 }
 
 export function Jumbatron(props: JumbatronProps): JSX.Element {
-	// todo: add promo text upon the arrow
-	// todo: think what to do with grills button
+	// fixme: think what to do with grills button
 	return (
 		<div className={ s.jumbatron } id='jumbatron'>
 			<div className={ s.jumbatronHeader }>
@@ -30,6 +30,11 @@ export function Jumbatron(props: JumbatronProps): JSX.Element {
 						{t('Grills')}
 					</Button>
 				</a>
+			</div>
+			<div className={ s.promoText }>
+				<Typography gutterBottom variant="h4" component="span" className={s.typo}>
+					{t('Get a discount if you book for tomorrow!')}
+				</Typography>
 			</div>
 			<div className={ s.jumbatronArrow }>
 				<a href="#boats">

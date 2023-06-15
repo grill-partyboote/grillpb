@@ -8,7 +8,7 @@ import s from "./footer.pcss";
 
 export interface FooterProps {
 }
-// todo: implement
+// fixme: implement
 export function Footer(props: FooterProps) {
 	const {
 	} = props;
