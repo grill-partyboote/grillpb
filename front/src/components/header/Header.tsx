@@ -20,16 +20,15 @@ export function Header(props: HeaderProps): JSX.Element {
 	return (
 		<div className={ s.headerWrapper } >
 			<div className={ s.header }>
-				<img src={logo} alt="" className={ s.logo }/>
+				<a href="#jumbatron">
+					<img src={logo} alt="" className={ s.logo }/>
+				</a>
 				<div className={ s.navbar }>
 					<Link href="#jumbatron" variant="body2">
 						{t('Start')}
 					</Link>
 					<Link href="#boats" variant="body2">
 						{t('Boats')}
-					</Link>
-					<Link href="#grills" variant="body2">
-						{t('Grills')}
 					</Link>
 					<Link href="#contacts" variant="body2">
 						{t('Contacts')}

@@ -10,9 +10,8 @@ import s from "./jumbatron.pcss";
 interface JumbatronProps {
 
 }
-
+// fixme: make arrow jumping
 export function Jumbatron(props: JumbatronProps): JSX.Element {
-	// fixme: think what to do with grills button
 	return (
 		<div className={ s.jumbatron } id='jumbatron'>
 			<div className={ s.jumbatronHeader }>
@@ -25,9 +24,9 @@ export function Jumbatron(props: JumbatronProps): JSX.Element {
 						{t('Boats')}
 					</Button>
 				</a>
-				<a href="#grills">
+				<a href="#contacts">
 					<Button variant="contained">
-						{t('Grills')}
+						{t('Contacts')}
 					</Button>
 				</a>
 			</div>

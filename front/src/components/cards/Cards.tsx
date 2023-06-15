@@ -11,7 +11,7 @@ import {
 
 import {t} from 'src/i18n';
 
-import {BoatData} from "src/App";
+import {BoatData} from "src/data/getData";
 
 import s from "./cards.pcss";
 

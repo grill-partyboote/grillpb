@@ -28,7 +28,7 @@ export function Contacts(props: ContactsProps) {
 	} = props;
 
 	return (
-		<Card className={s.contactBlock}>
+		<Card className={s.contactBlock} id='contacts'>
 			<CardContent>
 				<Typography variant="h6" component="h2" gutterBottom>
 					{t('Reach us directly')}
