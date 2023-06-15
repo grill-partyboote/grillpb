@@ -4,17 +4,19 @@ import {
 } from '@mui/material';
 import React from "react";
 
-import {t} from 'src/i18n';
 import logo from "src/pictures/logo.svg";
+import {HeaderTranslation} from "src/data/dataTypes";
 
 import s from "./header.pcss";
 
 export interface HeaderProps {
+	translations: HeaderTranslation;
 	openModal: () => void;
 }
 
 export function Header(props: HeaderProps): JSX.Element {
 	const {
+		translations,
 		openModal
 	} = props;
 	return (
@@ -25,15 +27,15 @@ export function Header(props: HeaderProps): JSX.Element {
 				</a>
 				<div className={ s.navbar }>
 					<Link href="#jumbatron" variant="body2">
-						{t('Start')}
+						{translations.start}
 					</Link>
 					<Link href="#boats" variant="body2">
-						{t('Boats')}
+						{translations.boats}
 					</Link>
 					<Link href="#contacts" variant="body2">
-						{t('Contacts')}
+						{translations.contacts}
 					</Link>
-					<Button variant="contained" onClick={openModal}>{t('Book')}</Button>
+					<Button variant="contained" onClick={openModal}>{translations.book}</Button>
 				</div>
 			</div>
 		</div>)

@@ -1,5 +1,5 @@
 import React from 'react';
-import {t} from 'src/i18n';
+
 import {
 	Card,
 	CardContent,
@@ -13,25 +13,21 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import s from "./contacts.pcss";
+import {ContactsData} from "src/data/dataTypes";
 
-export interface ContactsProps { // all strings are translated
-	phoneNumber: string;
-	email: string;
-	address: string;
-}
+export type ContactsProps = ContactsData;
 
 export function Contacts(props: ContactsProps) {
 	const {
-		phoneNumber,
-		email,
-		address,
+		translations,
+		values,
 	} = props;
 
 	return (
 		<Card className={s.contactBlock} id='contacts'>
 			<CardContent>
 				<Typography variant="h6" component="h2" gutterBottom>
-					{t('Reach us directly')}
+					{translations.title}
 				</Typography>
 				<List>
 					<ListItem className={s.listItem}>
@@ -40,9 +36,9 @@ export function Contacts(props: ContactsProps) {
 						</ListItemIcon>
 						<ListItemText primary={
 							<Typography variant="body1" component="p" gutterBottom>
-								{t('Phone')}: <a href={`tel:${phoneNumber}`}>
+								{translations.phone}: <a href={`tel:${values.phoneNumber}`}>
 								<Typography variant="body1" component="p" gutterBottom>
-									{phoneNumber}
+									{values.phoneNumber}
 								</Typography>
 							</a>
 							</Typography>
@@ -55,9 +51,9 @@ export function Contacts(props: ContactsProps) {
 						</ListItemIcon>
 						<ListItemText primary={
 							<Typography variant="body1" component="p" gutterBottom>
-								{t('E-mail')}: <a href={`mailto:${email}`}>
+								{translations.eMail}: <a href={`mailto:${values.email}`}>
 								<Typography variant="body1" component="p" gutterBottom>
-									{email}
+									{values.email}
 								</Typography>
 								</a>
 							</Typography>
@@ -70,7 +66,7 @@ export function Contacts(props: ContactsProps) {
 						</ListItemIcon>
 						<ListItemText primary={
 							<Typography variant="body1" component="p" gutterBottom>
-								{t('Address')}: {address}
+								{translations.address}: {values.address}
 							</Typography>
 						}/>
 					</ListItem>

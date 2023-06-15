@@ -9,14 +9,13 @@ import {
 	CardMedia
 } from '@mui/material';
 
-import {t} from 'src/i18n';
-
-import {BoatData} from "src/data/getData";
+import {Boats} from "src/data/dataTypes";
+import {BoatData} from "src/data/dataTypes";
 
 import s from "./cards.pcss";
 
 export interface CardProps {
-	cardsMeta: BoatData[]
+	cardsMeta: Boats
 	openModal: () => void;
 }
 
@@ -28,43 +27,43 @@ export function Cards(props: CardProps): JSX.Element {
 
 	return (
 		<div className={s.cardsWrapper} id='boats'>
-			{ cardsMeta.map((cardMeta: BoatData)=>{
+			{ cardsMeta.data.map((cardMeta: BoatData)=>{
 				return (
-					<Card className={`${s.card} ${(cardMeta.isUnderMaintenance || cardMeta.isComingSoon) && s.disabled}`} key={cardMeta.id}>
+					<Card className={`${s.card} ${(cardMeta.values.isUnderMaintenance || cardMeta.values.isComingSoon) && s.disabled}`} key={cardMeta.id}>
 						<div>
 							<CardMedia
 								component="img"
-								alt={cardMeta.title}
+								alt={cardMeta.translations.title}
 								height="140"
-								image={cardMeta.image}
+								image={cardMeta.values.image}
 							/>
 							<CardContent>
 								<Typography gutterBottom variant="h5" component="span">
-									{cardMeta.title}{
-										cardMeta.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
-											{t(' (coming soon)')}
+									{cardMeta.translations.title}{
+										cardMeta.values.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{cardsMeta.commonTranslations.comingSoon}
 										</Typography>
 									}{
-										cardMeta.isUnderMaintenance && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
-											{t(' (under maintenance)')}
+										cardMeta.values.isUnderMaintenance && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{cardsMeta.commonTranslations.underMaintenance}
 										</Typography>
 									}{
-										!cardMeta.isUnderMaintenance && !cardMeta.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
-											{t(' (book now)')}
+										!cardMeta.values.isUnderMaintenance && !cardMeta.values.isComingSoon && <Typography gutterBottom variant="h5" component="span" className={s.kek}>
+											{cardsMeta.commonTranslations.bookNow}
 										</Typography>
 									}
 								</Typography>
 								<Typography variant="body2" color="text.secondary">
-									{cardMeta.promtText}
+									{cardMeta.translations.promtText}
 								</Typography>
 							</CardContent>
 						</div>
 						<CardActions className={s.cardActions}>
 							<Button size="small"
-									disabled={cardMeta.isUnderMaintenance || cardMeta.isComingSoon}
+									disabled={cardMeta.values.isUnderMaintenance || cardMeta.values.isComingSoon}
 									onClick={openModal}
 							>
-								{t('Order')}
+								{cardsMeta.commonTranslations.order}
 							</Button>
 						</CardActions>
 					</Card>

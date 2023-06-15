@@ -1,25 +1,27 @@
 import React from "react";
-import {t} from 'src/i18n';
+
+import {Button} from "@mui/material";
+
+import {Contacts} from "src/components/contacts/Contacts";
+import {ParallaxData} from "src/data/dataTypes";
 
 import s from "./parallax.pcss";
-import {Contacts, ContactsProps} from "src/components/contacts/Contacts";
-import {Button} from "@mui/material";
 
 export interface ParallaxProps {
 	openModal: () => void;
-	contacts: ContactsProps;
+	parallaxData: ParallaxData
 }
 
 export function Parallax(props: ParallaxProps): JSX.Element {
 	const {
 		openModal,
-		contacts
+		parallaxData,
 	} = props;
 
 	return (
 		<div className={s.parallaxWrapper} id='parallax'>
 			<div className={s.parallaxSide}>
-				<Contacts {...contacts}/>
+				<Contacts {...parallaxData.contacts}/>
 			</div>
 			<div className={s.parallaxSide}>
 				<div>
@@ -28,7 +30,7 @@ export function Parallax(props: ParallaxProps): JSX.Element {
 							variant="contained"
 							onClick={openModal}
 					>
-						{t('Book one of our boats online')}
+						{parallaxData.button.translations.title}
 					</Button>
 				</div>
 			</div>

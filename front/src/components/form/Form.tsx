@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import {t} from 'src/i18n';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, FormGroup, Modal, Box, Typography } from "@mui/material";
 
 import s from "./form.pcss";
+import {FormTranslation} from "src/data/dataTypes";
 
 export interface FormProps {
+	translations: FormTranslation;
 	boatOptions: BoatOption[];
 	preSelectedBoatOption?: BoatOption;
 	isOpened: boolean;
@@ -21,6 +22,7 @@ interface BoatOption {
 
 export function Form(props: FormProps): JSX.Element {
 	const {
+		translations,
 		boatOptions,
 		preSelectedBoatOption,
 		isOpened,
@@ -100,7 +102,7 @@ export function Form(props: FormProps): JSX.Element {
 			return;
 		}
 
-		// todo: send query
+		// todo: send query (get func from main server connection file)
 		console.log({
 			name,
 			phoneNumber,
@@ -145,66 +147,66 @@ export function Form(props: FormProps): JSX.Element {
 		>
 			<div className={s.formWrapper}>
 				<Typography id="form-modal" variant="h5" gutterBottom>
-					{t('Book a Boat')}
+					{translations.title}
 				</Typography>
 				<form className={s.form}
 					onSubmit={(e) => e.preventDefault()}>
 					<TextField
-						label={t('name')}
+						label={translations.name}
 						value={name}
 						error={nameError}
-						helperText={nameError ? t('Name shouldnt be empty') : ''}
+						helperText={nameError ? translations.nameError : ''}
 						onChange={handleNameChange}
 					/>
 					<TextField
-						label={t('phone number')}
+						label={translations.phoneNumber}
 						variant="outlined"
 						value={'+49'+phoneNumber}
 						onChange={handlePhoneNumberChange}
 						error={phoneError}
-						helperText={phoneError ? t('Invalid phone number') : ''}
+						helperText={phoneError ? translations.phoneNumberError : ''}
 						inputProps={{ maxLength: 13 }}
 					/>
 					<TextField
-						label={t('start date')}
+						label={translations.startDate}
 						type="date"
 						value={startDate}
 						onChange={handleStartDateChange}
 						error={dateError}
-						helperText={dateError ? t('Invalid date') : ''}
+						helperText={dateError ? translations.dateError : ''}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
 					<TextField
-						label={t('end date')}
+						label={translations.endDate}
 						type="date"
 						value={endDate}
 						onChange={handleEndDateChange}
 						error={dateError}
-						helperText={dateError ? t('Invalid date') : ''}
+						helperText={dateError ? translations.dateError : ''}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
 					<TextField
-						label={t('e-mail')}
+						label={translations.eMail}
 						variant="outlined"
 						value={email}
 						onChange={handleEmailChange}
 						error={emailError}
-						helperText={emailError ? t('Invalid email address') : ''}
+						helperText={emailError ? translations.eMailError : ''}
 					/>
 					<FormControl>
 						<InputLabel id="boat-select-label">
-							{t('boat')}
+							{translations.boat}
 						</InputLabel>
 						<Select
 							labelId="boat-select-label"
 							value={ selectedBoat }
 							onChange={handleBoatChange}
 							id="boat-select-label"
-							label="Age"
+							label="boat"
 						>
 							{boatOptions.map((option: BoatOption) => (
 								<MenuItem
@@ -214,7 +216,7 @@ export function Form(props: FormProps): JSX.Element {
 									value={option.value}
 									disabled={option.disabled}
 								>
-									{option.label} ({t('max')} {option.maxPeopleCapability})
+									{option.label} ({translations.max} {option.maxPeopleCapability})
 								</MenuItem>
 							))}
 						</Select>
@@ -222,7 +224,7 @@ export function Form(props: FormProps): JSX.Element {
 					<Button type="submit"
 							onClick={handleSubmit}
 							disabled={emailError || phoneError || nameError || dateError || selectedBoatError}>
-						{t('Submit')}
+						{translations.submit}
 					</Button>
 				</form>
 			</div>

@@ -1,7 +1,6 @@
 import React from "react";
 import {transform} from "ol/proj";
 import openlayers from "openlayers";
-import {t} from 'src/i18n';
 import * as ol from "openlayers";
 
 import {
@@ -12,10 +11,9 @@ import {
 
 import s from "./map.pcss";
 import {Typography} from "@mui/material";
+import {MapData} from "src/data/dataTypes";
 
-export interface MapProps {
-	lonlat: [number, number]
-}
+type MapProps = MapData;
 
 const myTileSource = new openlayers.source.OSM()
 
@@ -23,7 +21,7 @@ export function MapComponent(props: MapProps){
 	return (
 		<div className={s.mapWrapper}>
 			<Typography variant="h4" component="p" gutterBottom>
-				{t('You can find us here')}
+				{props.title}
 			</Typography>
 			<OlMap {...props}/>
 		</div>
