@@ -234,3 +234,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+.idea
+back/static
+front/dist
+front/node_modules
