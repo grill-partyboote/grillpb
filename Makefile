@@ -1,4 +1,4 @@
-BACKEND_ADDRESS ?= 'localhost:1488'
+BACKEND_ADDRESS ?= 'http://localhost:6996/static/'
 
 install-locally:
 	python3 -m venv ${PYENVBASE}grillpb-venv
