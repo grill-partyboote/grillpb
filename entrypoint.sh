@@ -8,7 +8,7 @@ update_static() {
 run() {
   echo start the app
   cd back
-  python3 -m http.server --bind 0.0.0.0 5555
+  python3 -m http.server --bind 0.0.0.0 6996
 }
 
 case "$1" in
