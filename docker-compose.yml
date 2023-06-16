@@ -20,3 +20,4 @@ services:
     volumes:
       - "./front:/app/front"
       - "./back:/app/back"
+      - "/app/front/node_modules"

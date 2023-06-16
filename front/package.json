@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && webpack --progress --mode development",
-    "prod-build": "echo lol $backend_address && rm -rf dist ../back/static/ && backend_address=$backend_address webpack --progress --mode production --no-watch && cp -r dist ../back/static && rm -rf dist",
+    "prod-build": "rm -rf dist ../back/static/* && backend_address=$backend_address webpack --progress --mode production --no-watch && cp -r dist/* ../back/static && rm -rf dist",
     "webpack": "rm -rf dist && webpack --mode development --env watch",
     "dev": "nodemon app.js"
   },

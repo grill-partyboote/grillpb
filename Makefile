@@ -12,7 +12,7 @@ build:
 	docker build . -f prod.Dockerfile -t grillpb-app
 
 static:
-	docker run -e backend_address="${BACKEND_ADDRESS}" grillpb-app static
+	docker run -e backend_address="${BACKEND_ADDRESS}" -v `pwd`/back/:/app/back/ -v `pwd`/front:/app/front -v /app/front/node_modules grillpb-app static
 
 shell:
 	docker compose exec -ti grillpb-app bash
