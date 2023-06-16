@@ -14,7 +14,7 @@ services:
 #    restart: always
     command: run
     ports:
-      - "5555:5555"
+      - "6996:6996"
     depends_on:
       - grillpb-db
     volumes:
